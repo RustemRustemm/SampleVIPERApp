@@ -30,7 +30,7 @@ final class FirstRouter: FirstRouterProtocol {
     }
     
     func openSecondScreen() {
-
-        //TODO: - create second router
+        let secondRouter = SecondRouter(navigationController: navigationController!)
+        secondRouter.start()
     }
 }

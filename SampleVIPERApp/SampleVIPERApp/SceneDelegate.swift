@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private var firstRouter: FirstRouterProtocol?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,12 +19,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let window = UIWindow(windowScene: windowScene)
-        let viewController = ViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
-        window.rootViewController = navigationController
-        self.window = window
-        window.makeKeyAndVisible()
+        // 1. Создаем навигационный контроллер
+        let navigationController = UINavigationController()
+        
+        // 2. Инициализируем роутер первого модуля
+        firstRouter = FirstRouter(navigationController: navigationController)
+        firstRouter?.start()
+        
+        // 3. Настраиваем окно
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
         
     }
 

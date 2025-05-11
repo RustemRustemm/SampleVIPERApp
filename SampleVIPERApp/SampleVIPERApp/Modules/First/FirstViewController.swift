@@ -15,7 +15,7 @@ class FirstViewController: UIViewController, FirstViewProtocol {
 
     var presenter: FirstPresenterProtocol!
         
-        private lazy var button: UIButton = {
+            private lazy var button: UIButton = {
             let button = UIButton(type: .system)
             button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false

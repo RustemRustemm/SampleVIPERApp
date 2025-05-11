@@ -18,6 +18,7 @@ class SecondViewController: UIViewController, SecondViewProtocol {
         // Заменяем lazy var на кастомную кнопку
         private lazy var button = CustomButton(
             title: "Open Second Screen",
+            style: .secondary,
             target: self,
             action: #selector(didTapButton)
         )

@@ -18,6 +18,7 @@ class FirstViewController: UIViewController, FirstViewProtocol {
         // Заменяем lazy var на кастомную кнопку
         private lazy var button = CustomButton(
             title: "Go Back",
+            style: .primary,
             target: self,
             action: #selector(didTapButton)
         )

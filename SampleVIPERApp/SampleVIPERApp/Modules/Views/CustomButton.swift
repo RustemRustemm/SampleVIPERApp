@@ -7,12 +7,17 @@
 
 import UIKit
 
-class CustomButton: UIButton {
+enum ButtonStyle {
+    case primary   // Синяя кнопка
+    case secondary // Серая кнопка
+}
+
+final class CustomButton: UIButton {
 
     // MARK: - Init
-    init(title: String, target: Any?, action: Selector) {
+    init(title: String, style: ButtonStyle, target: Any?, action: Selector) {
         super.init(frame: .zero)
-        setupButton(title: title, target: target, action: action)
+        setupButton(title: title, style: style ,target: target, action: action)
     }
     
     required init?(coder: NSCoder) {
@@ -20,12 +25,33 @@ class CustomButton: UIButton {
     }
     
     // MARK: - Setup
-    private func setupButton(title: String, target: Any?, action: Selector) {
+    private func setupButton(title: String, style: ButtonStyle, target: Any?, action: Selector) {
+        
         setTitle(title, for: .normal)
-        titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        setTitleColor(.systemBlue, for: .normal)
-        addTarget(target, action: action, for: .touchUpInside)
         translatesAutoresizingMaskIntoConstraints = false
+        
+        switch style {
+        case .primary:
+            titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+            setTitleColor(.systemBlue, for: .normal)
+            setTitleColor(UIColor(red: 0, green: 0, blue: 255, alpha: 0.2), for: .highlighted)
+            backgroundColor = .clear
+        case .secondary:
+            titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+            setTitleColor(.white, for: .normal)
+            setTitleColor(.black, for: .highlighted)
+            backgroundColor = .systemGray
+            layer.cornerRadius = 8
+            
+            NSLayoutConstraint.activate([
+                self.widthAnchor.constraint(equalToConstant: 200),
+                self.heightAnchor.constraint(equalToConstant: 50)
+            ])
+            
+        }
+        
+        addTarget(target, action: action, for: .touchUpInside)
+        
     }
 }
 

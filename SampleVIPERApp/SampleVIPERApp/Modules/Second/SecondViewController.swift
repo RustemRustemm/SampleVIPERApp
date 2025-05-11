@@ -15,12 +15,12 @@ class SecondViewController: UIViewController, SecondViewProtocol {
 
     var presenter: SecondPresenterProtocol!
         
-        private lazy var button: UIButton = {
-            let button = UIButton(type: .system)
-            button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            return button
-        }()
+        // Заменяем lazy var на кастомную кнопку
+        private lazy var button = CustomButton(
+            title: "Open Second Screen",
+            target: self,
+            action: #selector(didTapButton)
+        )
 
         override func viewDidLoad() {
             super.viewDidLoad()
